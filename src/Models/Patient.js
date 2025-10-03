@@ -7,6 +7,8 @@ class Patient{
         email = '', 
         address = '',
         createdat='',
+        terapias_faltantes='',
+        ultima_terapia = ''
         
     }){
         this.id = id;
@@ -16,6 +18,8 @@ class Patient{
         this.email = email;
         this.address = address;
         this.createdat = createdat;
+        this.terapias_faltantes = terapias_faltantes;
+        this.ultima_terapia = ultima_terapia;
 
      
     }

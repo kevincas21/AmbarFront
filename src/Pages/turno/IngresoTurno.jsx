@@ -28,17 +28,18 @@ function IngresoTurno() {
       setCedula('');
     } 
     catch (error) {
-      if (error.response && error.response.status === 404) {
-        setErrorMessage("❌ No se ha encontrado su cédula. llame a recepción para su registro.");
-      } 
-      if (error.response && error.response.status === 400) {
-        setErrorMessage("❌ Ya tiene un turno pendiente. Por favor, espere su turno.");
-      }
-      else {
-        console.error("Error al crear el turno:", error);
-        setErrorMessage("❌ Ocurrió un error al crear el turno. Por favor, inténtelo de nuevo.");
-      }
-    }
+  if (error.response && error.response.status === 404) {
+    setErrorMessage("❌ No se ha encontrado su cédula. Llame a recepción para su registro.");
+  } 
+  else if (error.response && error.response.status === 400) {
+    setErrorMessage("❌ Ya tiene un turno pendiente. Por favor, espere su turno.");
+  }
+  else {
+    console.error("Error al crear el turno:", error);
+    setErrorMessage("❌ Ocurrió un error al crear el turno. Por favor, inténtelo de nuevo.");
+  }
+}
+
   };
 
   // 🔥 Borrar mensajes automáticamente después de 10 segundos

@@ -20,73 +20,79 @@ import TokenRefresher from './components/TokenRefresher';
 function App() {
   return (
     <Router>
-      <TokenRefresher/>
-      <div className="container mt-3">
-        <Routes>
-          <Route path="/" element={<LoginView />} />
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/menu" element={<NavPage />} />
+      <TokenRefresher />
+      <Routes>
+        <Route path="/" element={<LoginView />} />
+        <Route path="/login" element={<LoginView />} />
+        <Route path="/menu" element={<NavPage />} />
 
-          {/* Pacientes */}
-          <Route
-            path="/paciente"
-            element={<PrivateRoute element={PatientView} allowedRoles={['administrador', 'recepcionista']} />}
-          />
-          <Route
-            path="/paciente/crear"
-            element={<PrivateRoute element={PatientCreateView} allowedRoles={['administrador','recepcionista']} />}
-          />
-          <Route
-            path="/paciente/editar/:id"
-            element={<PrivateRoute element={PatientEditView} allowedRoles={['administrador','recepcionista']} />}
-          />
+        {/* Pacientes */}
+        <Route
+          path="/paciente"
+          element={<Wrapper><PrivateRoute element={PatientView} allowedRoles={['administrador', 'recepcionista']} /></Wrapper>}
+        />
+        <Route
+          path="/paciente/crear"
+          element={<Wrapper><PrivateRoute element={PatientCreateView} allowedRoles={['administrador','recepcionista']} /></Wrapper>}
+        />
+        <Route
+          path="/paciente/editar/:id"
+          element={<Wrapper><PrivateRoute element={PatientEditView} allowedRoles={['administrador','recepcionista']} /></Wrapper>}
+        />
 
-          {/* Turnos */}
-          <Route
-            path="/ingreso"
-            element={<PrivateRoute element={IngresoTurno} allowedRoles={['administrador', 'recepcionista', 'ingresar']} />}
-          />
-          <Route
-            path="/gestion"
-            element={<PrivateRoute element={GestionTurnos} allowedRoles={['administrador', 'recepcionista']} />}
-          />
-          <Route
-            path="/pantalla"
-            element={<PrivateRoute element={VisualizacionTurnos} allowedRoles={['administrador', 'recepcionista']} />}
-          />
+        {/* Turnos */}
+        <Route
+          path="/ingreso"
+          element={<Wrapper><PrivateRoute element={IngresoTurno} allowedRoles={['administrador', 'recepcionista', 'ingresar']} /></Wrapper>}
+        />
+        <Route
+          path="/gestion"
+          element={<Wrapper><PrivateRoute element={GestionTurnos} allowedRoles={['administrador', 'recepcionista']} /></Wrapper>}
+        />
 
-          {/* Pagos */}
-          <Route
-            path="/pago"
-            element={<PrivateRoute element={ConfirmarPago} allowedRoles={['administrador', 'recepcionista']} />}
-          />
+        {/* 👇 Pantalla SIN márgenes */}
+        <Route
+          path="/pantalla"
+          element={<PrivateRoute element={VisualizacionTurnos} allowedRoles={['administrador', 'recepcionista']} />}
+        />
 
-          {/* Terapeutas */}
-          <Route
-            path="/terapeuta"
-            element={<PrivateRoute element={TerapeutaView} allowedRoles={['administrador']} />}
-          />
-          <Route
-            path="/terapeuta/crear"
-            element={<PrivateRoute element={TerapeutaCreateView} allowedRoles={['administrador']} />}
-          />
-          <Route
-            path="/terapeuta/editar/:id"
-            element={<PrivateRoute element={TerapeutaEditView} allowedRoles={['administrador']} />}
-          />
+        {/* Pagos */}
+        <Route
+          path="/pago"
+          element={<Wrapper><PrivateRoute element={ConfirmarPago} allowedRoles={['administrador', 'recepcionista']} /></Wrapper>}
+        />
 
-          {/* Reportes */}
-          <Route
-            path="/reportes"
-            element={<PrivateRoute element={ReporteView} allowedRoles={['administrador']} />}
-          />
+        {/* Terapeutas */}
+        <Route
+          path="/terapeuta"
+          element={<Wrapper><PrivateRoute element={TerapeutaView} allowedRoles={['administrador']} /></Wrapper>}
+        />
+        <Route
+          path="/terapeuta/crear"
+          element={<Wrapper><PrivateRoute element={TerapeutaCreateView} allowedRoles={['administrador']} /></Wrapper>}
+        />
+        <Route
+          path="/terapeuta/editar/:id"
+          element={<Wrapper><PrivateRoute element={TerapeutaEditView} allowedRoles={['administrador']} /></Wrapper>}
+        />
 
-          {/* 404 */}
-          <Route path="*" element={<h1>404 Not Found</h1>} />
-        </Routes>
-      </div>
+        {/* Reportes */}
+        <Route
+          path="/reportes"
+          element={<Wrapper><PrivateRoute element={ReporteView} allowedRoles={['administrador']} /></Wrapper>}
+        />
+
+        {/* 404 */}
+        <Route path="*" element={<Wrapper><h1>404 Not Found</h1></Wrapper>} />
+      </Routes>
     </Router>
   );
 }
+
+// Componente que agrega container solo a las vistas normales
+function Wrapper({ children }) {
+  return <div className="container mt-3">{children}</div>;
+}
+
 
 export default App;

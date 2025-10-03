@@ -93,8 +93,23 @@ const handleSubmit = async (event) => {
             onChange={handleChange}
             isInvalid={!!errors.email}
           />
+          
           <Form.Control.Feedback type="invalid">
             {errors.email}
+          </Form.Control.Feedback>
+        </Form.Group>
+        
+          <Form.Group controlId="formTherapiesMissing">
+          <Form.Label>Terapias Faltantes</Form.Label>
+          <Form.Control
+            type="number"
+            name="terapias_faltantes"
+            value={patient.terapias_faltantes || 0}
+            onChange={handleChange}
+            isInvalid={!!errors.terapias_faltantes}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.terapias_faltantes}
           </Form.Control.Feedback>
         </Form.Group>
 

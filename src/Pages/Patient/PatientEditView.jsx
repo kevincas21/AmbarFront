@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { getPatientById, updatePatient } from '../../Api/PatientApi';
 import Patient from '../../Models/Patient';
@@ -7,9 +7,9 @@ import Patient from '../../Models/Patient';
 
 
 function PatientEditView() {
-    const navigate = useNavigate();
-    const [patient, setPatient] = useState(null);
-    const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+  const [patient, setPatient] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const fetchPatient = async (id) => {
     try {
@@ -95,30 +95,48 @@ function PatientEditView() {
               onChange={handleChange}
               isInvalid={!!errors.telefono}
             />
-            <Form.Group controlId="formEmail">
-                    <Form.Label>Correo Electronico</Form.Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      value={patient.email || ''}
-                      onChange={handleChange}
-                      isInvalid={!!errors.email}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.email}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-          </Form.Group>
+            </Form.Group>
 
-<div className='mt-3'>
-  <Button variant="primary" type="submit" className="me-2 ">
-            Guardar Cambios
-          </Button>
-          <Button variant="secondary" onClick={handleCancel}>
-            Cancelar
-          </Button>
-</div>
-        
+
+           
+                <Form.Group controlId="formEmail">
+              <Form.Label>Correo Electronico</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={patient.email || ''}
+                onChange={handleChange}
+                isInvalid={!!errors.email}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+             <Form.Group controlId="terapias_faltantes">
+              <Form.Label>Terapias Faltantes</Form.Label>
+              <Form.Control
+                type="number"
+                name="terapias_faltantes"
+                value={patient.terapias_faltantes ?? ''}
+                onChange={handleChange}
+                isInvalid={!!errors.terapias_faltantes}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.terapias_faltantes}
+              </Form.Control.Feedback>
+          
+            </Form.Group>
+          
+
+          <div className='mt-3'>
+            <Button variant="primary" type="submit" className="me-2 ">
+              Guardar Cambios
+            </Button>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancelar
+            </Button>
+          </div>
+
         </Form>
       )}
     </Container>

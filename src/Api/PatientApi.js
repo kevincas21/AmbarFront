@@ -2,7 +2,6 @@ import axios from "axios";
 import { getAuthHeaders } from "./AuthApi";
 
 const API_BASE_URL = "http://127.0.0.1:8000/ambar";
-
 // 📌 Obtener todos los pacientes
 export const getPatients = async () => {
   try {
